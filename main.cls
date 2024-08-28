@@ -100,6 +100,8 @@ Sub formatClientSheet(newSheetName As String, oldSheet As Worksheet)
     
     oldSheet.Delete
     
+    newClientSheet.Columns(1).Delete
+    
     Set newRegion = newClientSheet.Range("A1").CurrentRegion
     
     For Each cel In newRegion                                           ' add format
@@ -114,7 +116,7 @@ Sub formatClientSheet(newSheetName As String, oldSheet As Worksheet)
 End Sub
 
 
-Sub PastePageNameByID()
+Sub PurpleKnightReportAutomation()
     Dim ws As Worksheet
     Dim targetSheet As Worksheet
     Dim idColumn As Range
@@ -126,15 +128,9 @@ Sub PastePageNameByID()
     
     newSheetName = InputBox("Saisir le nom du Client")
     
-    ' Set the worksheet where IDs are located
-    Set targetSheet = ThisWorkbook.Sheets("Indicators results")
+    Set targetSheet = ThisWorkbook.Sheets("Indicators results")                                                 ' Set the worksheet where IDs are located
     
     Set idColumn = targetSheet.Range("A1:A" & targetSheet.Cells(targetSheet.Rows.Count, "A").End(xlUp).Row)     ' Define the column where the IDs are located - parsing through whole column returns error because column is huge
-    
-    
-    'Set ws = Worksheets("SI000155")
-    ' Call DelColumns(ws)
-    'resultStr = RowToString(ws)
 
     
     For Each cell In idColumn                                           ' Double for loop to parse through ID colum and page names - Targets only used cells
@@ -155,11 +151,7 @@ Sub PastePageNameByID()
     
     Call formatClientSheet(newSheetName, targetSheet)
     
-    targetSheet.Columns(1).Delete
     Call DelQueries
     Debug.Print
 
 End Sub
-
-
-
