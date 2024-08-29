@@ -93,7 +93,7 @@ Sub formatClientSheet(newSheetName As String, oldSheet As Worksheet)
     Dim cel As Range
     
     If Not Len(newSheetName) = 0 Then
-        ThisWorkbook.Sheets.Add.Name = newSheetName                         'create new sheet
+        ThisWorkbook.Sheets.Add(After:=ActiveWorkbook.Worksheets(ActiveWorkbook.Worksheets.Count)).Name = newSheetName                         'create new sheet
         Set newClientSheet = ThisWorkbook.Sheets(newSheetName)
         
         Set selectedRegion = oldSheet.Range("A1").CurrentRegion             ' find active region in old worksheet
