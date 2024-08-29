@@ -92,27 +92,29 @@ Sub formatClientSheet(newSheetName As String, oldSheet As Worksheet)
     Dim newRegion As Range
     Dim cel As Range
     
-    ThisWorkbook.Sheets.Add.Name = newSheetName                         'create new sheet
-    Set newClientSheet = ThisWorkbook.Sheets(newSheetName)
-    
-    Set selectedRegion = oldSheet.Range("A1").CurrentRegion             ' find active region in old worksheet
-    selectedRegion.Copy newClientSheet.Cells
-    
-    oldSheet.Delete
-    
-    newClientSheet.Columns(1).Delete
-    
-    Set newRegion = newClientSheet.Range("A1").CurrentRegion
-    
-    For Each cel In newRegion                                           ' add format
-        cel.Borders.Color = RGB(192, 192, 192)
-        cel.Interior.Color = RGB(255, 255, 255)
-        cel.Font.Color = RGB(0, 0, 0)
-        cel.WrapText = True
-        cel.VerticalAlignment = xlCenter
-        cel.EntireColumn.AutoFit
-        If cel.ColumnWidth > 75 Then cel.ColumnWidth = 75
-    Next cel
+    If Not Len(newSheetName) = 0 Then
+        ThisWorkbook.Sheets.Add.Name = newSheetName                         'create new sheet
+        Set newClientSheet = ThisWorkbook.Sheets(newSheetName)
+        
+        Set selectedRegion = oldSheet.Range("A1").CurrentRegion             ' find active region in old worksheet
+        selectedRegion.Copy newClientSheet.Cells
+        
+        oldSheet.Delete
+        
+        newClientSheet.Columns(1).Delete
+        
+        Set newRegion = newClientSheet.Range("A1").CurrentRegion
+        
+        For Each cel In newRegion                                           ' add format
+            cel.Borders.Color = RGB(192, 192, 192)
+            cel.Interior.Color = RGB(255, 255, 255)
+            cel.Font.Color = RGB(0, 0, 0)
+            cel.WrapText = True
+            cel.VerticalAlignment = xlCenter
+            cel.EntireColumn.AutoFit
+            If cel.ColumnWidth > 75 Then cel.ColumnWidth = 75
+        Next cel
+    End If
 End Sub
 
 
